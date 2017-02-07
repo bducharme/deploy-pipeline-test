@@ -1,0 +1,28 @@
+machine:
+  python:
+    version: 2.7
+  services:
+    - docker
+
+dependencies:
+  pre:
+    - sudo apt-get install python-dev
+    - sudo pip install 'awsebcli==3.7.4' --force-reinstall
+  override:
+    - docker build --rm=false --tag deploy-pipeline-test .
+
+test:
+  override:
+    - npm test
+    - docker run -d -p 3000:3000 deploy-pipeline-test
+    - curl --retry 10 --retry-delay 5 -v http://localhost:3000
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - sudo bash ./deploy_prod.sh
+  staging:
+    branch: staging
+    commands:
+      - sudo bash ./deploy_staging.sh

@@ -21,8 +21,8 @@ deployment:
   production:
     branch: master
     commands:
-      - sudo bash ./deploy_prod.sh
+      - sudo bash ./deploy.sh prod
   staging:
     branch: staging
     commands:
-      - sudo bash ./deploy_staging.sh
+      - sudo bash ./deploy.sh staging

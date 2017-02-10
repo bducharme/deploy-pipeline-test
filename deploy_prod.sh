@@ -16,25 +16,19 @@ echo rouge
 
 #if [ "$dnsIsAvailable" != "true" ]; then
 
-  #aws s3 cp ${APP_NAME}-${APP_VERSION}.zip s3://${APP_NAME}/${APP_NAME}-${APP_VERSION}.zip
-  eb init ${APP_NAME}
 
-  #aws s3 cp ${APP_NAME}-${APP_VERSION}.zip s3://${APP_NAME}/${APP_NAME}-${APP_VERSION}.zip
+ ## eb init ${APP_NAME} --region us-east-1 --platform docker-1.12.6
 
-#  aws elasticbeanstalk create-application-version \
-#    --application-name ${APP_NAME} \
-#    --version-label ${APP_VERSION} \
-#    --source-bundle S3Bucket="${APP_NAME}", S3Key="${APP_NAME}-${APP_VERSION}.zip"
+echo vert
 
-  eb create "${APP_NAME}-prod" \
-    --cfg savedconfig \
-    --instance_type t2.micro \
-    --platform docker-1.12.6 \
-    --region us-east-1 \
-    --scale 2 \
-    --version ${APP_VERSION} \
+#  eb create "${APP_NAME}-prod" \
+#    --instance_type t2.micro \
+#    --platform docker-1.12.6 \
+#    --region us-east-1 \
+#    --scale 1
 
   echo $(eb status "${APP_NAME}-prod");
+    echo jaune;
   echo $(eb status "${APP_NAME}-prodg");
 
   eb deploy "${APP_NAME}-prod"
